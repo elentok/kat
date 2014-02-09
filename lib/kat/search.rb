@@ -192,7 +192,7 @@ module Kat
       search_proc = -> page {
         begin
           uri = URI(URI::encode(to_s page))
-          res = Net::HTTP.start(uri.host) { |http| http.get uri }
+          res = Net::HTTP.start(uri.host) { |http| http.get uri.request_uri }
           @pages = 0 and return if res.code == '404'
 
           doc = Nokogiri::HTML(res.body)
